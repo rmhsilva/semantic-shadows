@@ -1,0 +1,140 @@
+/**
+ * The credit for the drop-shadow css wizardly here goes to 
+ * Divya Manian, Matt Hamm, and Nicolas Gallagher.
+ * Most of the styling was taken from Nicolas Gallagher's demo page. Thanks!
+ * http://nicolasgallagher.com/css-drop-shadows-without-images/
+ *
+ * 
+ * Drop shadows, made semantic
+ * ------------------------
+ * 
+ * Provides mixins:
+ *     sh-raised()
+ *     sh-rotated()
+ *     sh-lifted()
+ *     sh-curved-vt-1()
+ *     sh-curved-vt-2()
+ *     sh-curved-hz-1()
+ *     sh-curved-hz-2()
+ */
+
+// Base code required by all drop shadows
+_drop-shadow()
+	position relative
+	&:before, &:after
+		content ""
+		position absolute
+		z-index -2
+
+// Styles for raised shadows
+sh-raised()
+	_drop-shadow()
+	-webkit-box-shadow 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset
+	   -moz-box-shadow 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset
+	    box-shadow 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset
+
+
+// Base styles for all rotated shadows
+sh-rotated(x = -3)
+	_drop-shadow()
+	-webkit-box-shadow none
+	   -moz-box-shadow none
+	        box-shadow none
+	-webkit-transform rotate(unit(x,'deg'))
+	   -moz-transform rotate(unit(x,'deg'))
+	    -ms-transform rotate(unit(x,'deg'))
+	     -o-transform rotate(unit(x,'deg'))
+	        transform rotate(unit(x,'deg'))
+
+	& > :first-child:before
+		content ""
+		position absolute
+		z-index -1
+		top 0
+		bottom 0
+		left 0
+		right 0
+		background #fff
+		-webkit-box-shadow 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset
+		   -moz-box-shadow 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset
+		        box-shadow 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset
+
+
+// Lifted TODO: adjust shadow width and spacing automatically for element width
+sh-lifted()
+	_drop-shadow()
+	&:before, &:after
+		bottom 16px
+		left 5px
+		width 45%
+		height 20%
+		max-width 300px
+		max-height 100px
+		-webkit-box-shadow 0 15px 10px rgba(0, 0, 0, 0.7)
+		   -moz-box-shadow 0 15px 10px rgba(0, 0, 0, 0.7)
+		        box-shadow 0 15px 10px rgba(0, 0, 0, 0.7)
+		-webkit-transform rotate(-3deg)
+		   -moz-transform rotate(-3deg)
+		    -ms-transform rotate(-3deg)
+		     -o-transform rotate(-3deg)
+		        transform rotate(-3deg)
+	
+	&:after
+		right 5px
+		left auto
+		-webkit-transform rotate(3deg)
+		   -moz-transform rotate(3deg)
+		    -ms-transform rotate(3deg)
+		     -o-transform rotate(3deg)
+		        transform rotate(3deg)
+
+
+// Mixin for all curved shadows
+_sh-curved()
+	_drop-shadow()
+	&:before
+		top 10px
+		bottom 10px
+		left 0
+		right 50%
+		-webkit-box-shadow 0 0 15px rgba(0,0,0,0.6)
+		   -moz-box-shadow 0 0 15px rgba(0,0,0,0.6)
+		        box-shadow 0 0 15px rgba(0,0,0,0.6)
+		-moz-border-radius 10px / 100px
+		     border-radius 10px / 100px
+
+sh-curved-vt-1()
+	_sh-curved()
+
+sh-curved-vt-2()
+	_sh-curved()
+	&:before
+		right 0
+
+sh-curved-hz-1()
+	_sh-curved()
+	&:before
+		top 50%
+		bottom 0
+		left 10px
+		right 10px
+		-moz-border-radius 100px / 10px
+		     border-radius 100px / 10px
+
+sh-curved-hz-2()
+	_sh-curved()
+	&:before
+		top 0
+		bottom 0
+		left 10px
+		right 10px
+		-moz-border-radius 100px / 10px
+		     border-radius 100px / 10px
+
+
+// A subtle inner shadow
+sh-inner-shadow()
+	-webkit-box-shadow 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset
+	   -moz-box-shadow 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset
+	        box-shadow 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset
+
